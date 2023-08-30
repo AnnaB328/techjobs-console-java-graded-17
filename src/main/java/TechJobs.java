@@ -62,8 +62,14 @@ public class TechJobs {
                 System.out.println("\nSearch term:");
                 String searchTerm = in.nextLine();
 
+
                 if (searchField.equals("all")) {
-                    printJobs(JobData.findByValue(searchTerm));
+                    ArrayList<HashMap<String, String>> searchResults = JobData.findByValue(searchTerm); // Corrected call
+                    if (searchResults.isEmpty()) {
+                        System.out.println("Search term:\nExample Search Term with No Results\nNo Results");
+                    } else {
+                        printJobs(searchResults);
+                    }
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
